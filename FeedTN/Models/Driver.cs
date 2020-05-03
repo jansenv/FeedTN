@@ -1,6 +1,10 @@
-﻿namespace FeedTN.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FeedTN.Models
 {
-    public class Driver
+    public class Driver : ApplicationUser
     {
+        [Key]
+        public int DriverId { get; set; }
     }
 }

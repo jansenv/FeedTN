@@ -23,7 +23,7 @@ namespace FeedTN.Models
         public string LastName { get; set; }
 
         [Required]
-        public string StreetAddress { get; set; }
+        public string Address { get; set; }
 
         public bool IsDriver { get; set; }
 
