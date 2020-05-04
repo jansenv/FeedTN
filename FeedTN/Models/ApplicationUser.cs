@@ -25,8 +25,6 @@ namespace FeedTN.Models
         [Required]
         public string Address { get; set; }
 
-        public bool IsDriver { get; set; }
-
         public bool IsAdmin { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }

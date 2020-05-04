@@ -24,10 +24,6 @@ namespace FeedTN.Models
         [Required]
         public ApplicationUser User { get; set; }
 
-        public string DriverId { get; set; }
-
-        public Driver Driver { get; set; }
-
         public virtual ICollection<UserMenuItem> UserMenuItems { get; set; }
     }
 }
