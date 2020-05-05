@@ -9,6 +9,7 @@ using FeedTN.Models.MenuItemViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FeedTN.Controllers
 {
@@ -26,9 +27,12 @@ namespace FeedTN.Controllers
         }
 
         // GET: MenuItems
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var menuItems = await _context.MenuItem
+                .ToListAsync();
+
+            return View(menuItems);
         }
 
         // GET: MenuItems/Details/5
@@ -84,19 +88,35 @@ namespace FeedTN.Controllers
         }
 
         // GET: MenuItems/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            var menuItem = await _context.MenuItem.FirstOrDefaultAsync(mi => mi.MenuItemId == id);
+
+            return View(menuItem);
         }
 
         // POST: MenuItems/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, MenuItem menuItem)
         {
             try
             {
-                // TODO: Add update logic here
+                var menuItemItem = new MenuItem()
+                {
+                    MenuItemId = menuItem.MenuItemId,
+                    Title = menuItem.Title,
+                    Description = menuItem.Description,
+                    ImagePath = menuItem.ImagePath,
+                    FavoriteCount = menuItem.FavoriteCount,
+                    Active = menuItem.Active,
+                    GlutenFree = menuItem.GlutenFree,
+                    Vegetarian = menuItem.Vegetarian,
+                    Vegan = menuItem.Vegan
+                };
+
+                _context.MenuItem.Update(menuItemItem);
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
@@ -107,23 +127,38 @@ namespace FeedTN.Controllers
         }
 
         // GET: MenuItems/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> SetInactive(int id)
         {
-            return View();
+            var menuItem = await _context.MenuItem.FirstOrDefaultAsync(mi => mi.MenuItemId == id);
+
+            return View(menuItem);
         }
 
-        // POST: MenuItems/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> SetItemInactive(MenuItem menuItem)
         {
             try
             {
-                // TODO: Add delete logic here
+                var menuItemItem = new MenuItem()
+                {
+                    MenuItemId = menuItem.MenuItemId,
+                    Title = menuItem.Title,
+                    Description = menuItem.Description,
+                    ImagePath = menuItem.ImagePath,
+                    FavoriteCount = menuItem.FavoriteCount,
+                    Active = false,
+                    GlutenFree = menuItem.GlutenFree,
+                    Vegetarian = menuItem.Vegetarian,
+                    Vegan = menuItem.Vegan
+                };
+
+                _context.MenuItem.Update(menuItemItem);
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }

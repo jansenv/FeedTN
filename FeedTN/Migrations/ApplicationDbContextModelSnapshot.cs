@@ -104,16 +104,16 @@ namespace FeedTN.Migrations
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
                             Address = "123 Infinity Way",
-                            ConcurrencyStamp = "abfde468-e899-4254-b6b1-46b899789913",
+                            ConcurrencyStamp = "73c8ba35-942d-4206-b0d8-10fbccb93cfd",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Admina",
-                            IsAdmin = false,
+                            IsAdmin = true,
                             LastName = "Straytor",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAi7I9Rnu3i27/Q/crhcSOyQikCBFpDXBSH0MZ4dGeK4PW3D/lmRaYPx3Focr0eQ3A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKVZaGtxYmxKdbJ/92tExQtsevx/CSjMpguJYPMEtRvWCj6/37liI8l2b9TycbCuhw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,
@@ -145,7 +145,7 @@ namespace FeedTN.Migrations
 
             modelBuilder.Entity("FeedTN.Models.MenuItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("MenuItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -174,7 +174,7 @@ namespace FeedTN.Migrations
                     b.Property<bool>("Vegetarian")
                         .HasColumnType("bit");
 
-                    b.HasKey("Id");
+                    b.HasKey("MenuItemId");
 
                     b.ToTable("MenuItem");
                 });

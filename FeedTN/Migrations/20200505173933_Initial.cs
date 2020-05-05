@@ -54,7 +54,7 @@ namespace FeedTN.Migrations
                 name: "MenuItem",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    MenuItemId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
@@ -67,7 +67,7 @@ namespace FeedTN.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MenuItem", x => x.Id);
+                    table.PrimaryKey("PK_MenuItem", x => x.MenuItemId);
                 });
 
             migrationBuilder.CreateTable(
@@ -235,7 +235,7 @@ namespace FeedTN.Migrations
                         name: "FK_Favorite_MenuItem_MenuItemId",
                         column: x => x.MenuItemId,
                         principalTable: "MenuItem",
-                        principalColumn: "Id",
+                        principalColumn: "MenuItemId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Favorite_AspNetUsers_UserId",
@@ -263,7 +263,7 @@ namespace FeedTN.Migrations
                         name: "FK_UserMenuItem_MenuItem_MenuItemId1",
                         column: x => x.MenuItemId1,
                         principalTable: "MenuItem",
-                        principalColumn: "Id",
+                        principalColumn: "MenuItemId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_UserMenuItem_Order_OrderId",
@@ -282,7 +282,7 @@ namespace FeedTN.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsAdmin", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "123 Infinity Way", "abfde468-e899-4254-b6b1-46b899789913", "admin@admin.com", true, "Admina", false, "Straytor", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEAi7I9Rnu3i27/Q/crhcSOyQikCBFpDXBSH0MZ4dGeK4PW3D/lmRaYPx3Focr0eQ3A==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com" });
+                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "123 Infinity Way", "73c8ba35-942d-4206-b0d8-10fbccb93cfd", "admin@admin.com", true, "Admina", true, "Straytor", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEKVZaGtxYmxKdbJ/92tExQtsevx/CSjMpguJYPMEtRvWCj6/37liI8l2b9TycbCuhw==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
