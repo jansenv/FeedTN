@@ -1,0 +1,62 @@
+﻿@model FeedTN.Models.MenuItemViewModels.MenuItemViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add a Menu Item</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MenuItem.Title" class="control-label">Title</label>
+                <input asp-for="MenuItem.Title" class="form-control" />
+                <span asp-validation-for="MenuItem.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MenuItem.Description" class="control-label">Description</label>
+                <textarea asp-for="MenuItem.Description" class="form-control"></textarea>
+                <span asp-validation-for="MenuItem.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MenuItem.Active" class="control-label">Add to Today's Menu</label>
+                <input type="checkbox" asp-for="MenuItem.Active" class="form-control" />
+                <span asp-validation-for="MenuItem.Active" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label">Upload an Image</label>
+                <input asp-for="ImageFile" class="form-control" type="file"/>
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MenuItem.Vegetarian" class="control-label">Vegetarian</label>
+                <input type="checkbox" asp-for="MenuItem.Vegetarian" class="form-control" />
+                <span asp-validation-for="MenuItem.Vegetarian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MenuItem.Vegan" class="control-label">Vegan</label>
+                <input type="checkbox" asp-for="MenuItem.Vegan" class="form-control" />
+                <span asp-validation-for="MenuItem.Vegan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MenuItem.GlutenFree" class="control-label">Gluten Free</label>
+                <input type="checkbox" asp-for="MenuItem.GlutenFree" class="form-control" />
+                <span asp-validation-for="MenuItem.GlutenFree" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
