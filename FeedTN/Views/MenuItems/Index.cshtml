@@ -1,0 +1,58 @@
+﻿@model IEnumerable<FeedTN.Models.MenuItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Menu</h1>
+
+<p>
+    <a asp-action="Create">Add New Menu Item</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                Gluten Free 
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vegetarian)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vegan)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <img style="max-height: 250px; max-width: 250px" src="~/images/@item.ImagePath" alt="menu item image" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlutenFree)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vegetarian)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vegan)
+            </td>
+            <td>
+                @*Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

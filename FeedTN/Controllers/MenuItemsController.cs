@@ -9,6 +9,7 @@ using FeedTN.Models.MenuItemViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FeedTN.Controllers
 {
@@ -26,9 +27,12 @@ namespace FeedTN.Controllers
         }
 
         // GET: MenuItems
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var menuItems = await _context.MenuItem
+                .ToListAsync();
+
+            return View(menuItems);
         }
 
         // GET: MenuItems/Details/5
