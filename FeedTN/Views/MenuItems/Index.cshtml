@@ -10,6 +10,11 @@
     <a asp-action="Create">Add New Menu Item</a>
 </p>
 
+<a type="button" class="btn btn-primary mb-2" asp-action="Index" asp-route-filter="Gluten Free">Gluten Free</a>
+<a type="button" class="btn btn-success mb-2" asp-action="Index" asp-route-filter="Vegetarian">Vegetarian</a>
+<a type="button" class="btn btn-warning mb-2" asp-action="Index" asp-route-filter="Vegan">Vegan</a>
+<a type="button" class="btn btn-info mb-2" asp-action="Index" asp-route-filter="All">Show All</a>
+
 <table class="table">
     <thead>
         <tr>
@@ -39,7 +44,9 @@
             {
                 <tr>
                     <td>
-                        <img style="max-height: 250px; max-width: 250px" src="~/images/@item.ImagePath" alt="menu item image" />
+                        <a href=@Url.Action("Details", "MenuItems", new { id = item.MenuItemId }) title="Details" class="links">
+                            <img style="max-height: 250px; max-width: 250px" src="~/images/@item.ImagePath" alt="menu item image" />
+                        </a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Title)
@@ -54,7 +61,7 @@
                         @Html.DisplayFor(modelItem => item.Vegan)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id=item.MenuItemId }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MenuItemId })
                         @*Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                         @Html.ActionLink("SetInactive", "SetInactive", new { id = item.MenuItemId }) *@
                     </td>
@@ -92,7 +99,9 @@
             {
                 <tr>
                     <td>
-                        <img style="max-height: 250px; max-width: 250px" src="~/images/@item.ImagePath" alt="menu item image" />
+                        <a href=@Url.Action("Details", "MenuItems", new { id = item.MenuItemId }) title="Details" class="links">
+                            <img style="max-height: 250px; max-width: 250px" src="~/images/@item.ImagePath" alt="menu item image" />
+                        </a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Title)
@@ -107,9 +116,9 @@
                         @Html.DisplayFor(modelItem => item.Vegan)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id=item.MenuItemId }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MenuItemId })
                         @*Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }) *@
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) *@
                     </td>
                 </tr>
             }

@@ -27,10 +27,36 @@ namespace FeedTN.Controllers
         }
 
         // GET: MenuItems
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string filter)
         {
             var menuItems = await _context.MenuItem
                 .ToListAsync();
+            
+            switch (filter)
+            {
+                case "Gluten Free":
+                    menuItems = await _context.MenuItem
+                        .Where(mi => mi.GlutenFree == true)
+                        .ToListAsync();
+                    break;
+
+                case "Vegetarian":
+                    menuItems = await _context.MenuItem
+                        .Where(mi => mi.Vegetarian == true)
+                        .ToListAsync();
+                    break;
+
+                case "Vegan":
+                    menuItems = await _context.MenuItem
+                        .Where(mi => mi.Vegan == true)
+                        .ToListAsync();
+                    break;
+
+                default:
+                    menuItems = await _context.MenuItem
+                        .ToListAsync();
+                    break;
+            }
 
             return View(menuItems);
         }
@@ -121,44 +147,6 @@ namespace FeedTN.Controllers
                 return RedirectToAction(nameof(Index));
             }
             catch
-            {
-                return View();
-            }
-        }
-
-        // GET: MenuItems/Delete/5
-        public async Task<ActionResult> SetInactive(int id)
-        {
-            var menuItem = await _context.MenuItem.FirstOrDefaultAsync(mi => mi.MenuItemId == id);
-
-            return View(menuItem);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SetItemInactive(MenuItem menuItem)
-        {
-            try
-            {
-                var menuItemItem = new MenuItem()
-                {
-                    MenuItemId = menuItem.MenuItemId,
-                    Title = menuItem.Title,
-                    Description = menuItem.Description,
-                    ImagePath = menuItem.ImagePath,
-                    FavoriteCount = menuItem.FavoriteCount,
-                    Active = false,
-                    GlutenFree = menuItem.GlutenFree,
-                    Vegetarian = menuItem.Vegetarian,
-                    Vegan = menuItem.Vegan
-                };
-
-                _context.MenuItem.Update(menuItemItem);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
             {
                 return View();
             }
