@@ -111,23 +111,40 @@ namespace FeedTN.Controllers
         }
 
         // GET: MenuItems/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> SetInactive(int id)
         {
-            return View();
+            var menuItem = await _context.MenuItem.FirstOrDefaultAsync(mi => mi.MenuItemId == id);
+
+            return View(menuItem);
         }
 
-        // POST: MenuItems/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> SetInactive(int id, MenuItem menuItem)
         {
             try
             {
-                // TODO: Add delete logic here
+                var foundMenuItem = await _context.MenuItem.FirstOrDefaultAsync(mi => mi.MenuItemId == id);
+
+                var menuItemItem = new MenuItem()
+                {
+                    MenuItemId = id,
+                    Title = foundMenuItem.Title,
+                    Description = foundMenuItem.Description,
+                    ImagePath = foundMenuItem.ImagePath,
+                    FavoriteCount = foundMenuItem.FavoriteCount,
+                    Active = false,
+                    GlutenFree = foundMenuItem.GlutenFree,
+                    Vegetarian = foundMenuItem.Vegetarian,
+                    Vegan = foundMenuItem.Vegan
+                };
+
+                _context.MenuItem.Update(menuItemItem);
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }

@@ -6,7 +6,7 @@ namespace FeedTN.Models
     {
         [Key]
 
-        public int Id { get; set; }
+        public int MenuItemId { get; set; }
 
         public string Title { get; set; }
 

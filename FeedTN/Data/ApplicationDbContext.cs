@@ -31,6 +31,7 @@ namespace FeedTN.Data
                 FirstName = "Admina",
                 LastName = "Straytor",
                 Address = "123 Infinity Way",
+                IsAdmin = true,
                 UserName = "admin@admin.com",
                 NormalizedUserName = "ADMIN@ADMIN.COM",
                 Email = "admin@admin.com",
