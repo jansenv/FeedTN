@@ -101,13 +101,22 @@ namespace FeedTN.Controllers
         // POST: Orders/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(OrderDetailViewModel viewModel)
         {
             try
             {
-                // TODO: Add update logic here
+                var user = await GetCurrentUserAsync();
+                var dataModel = await _context.Order.FirstOrDefaultAsync(o => o.OrderId == viewModel.Order.OrderId);
+                dataModel.DateCreated = viewModel.Order.DateCreated;
+                dataModel.UserId = user.Id;
+                dataModel.DateCompleted = DateTime.Now;
 
-                return RedirectToAction(nameof(Index));
+                _context.Order.Update(dataModel);
+                await _context.SaveChangesAsync();
+
+                TempData["orderConfirmed"] = "Your order has been processed.";
+
+                return RedirectToAction("Index", "MenuItems");
             }
             catch
             {

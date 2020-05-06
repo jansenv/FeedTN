@@ -30,7 +30,13 @@
     </tbody>
 </table>
 
-<button class="btn btn-outline-success badge-success border-success" >@Html.ActionLink("CHECKOUT", "Edit", new { id = Model.Order.OrderId }) </button>
+<form asp-Controller="Orders" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Order.OrderId" />
+    <div class="form-group">
+        <input type="submit" class="btn-success bg-success border-success" value="Confirm" />
+    </div>
+</form>
+
 <form asp-controller="Orders" asp-action="Delete" method="post">
     <input type="submit" class="btn-danger bg-danger border-danger" value="Cancel Order" />
 </form>
