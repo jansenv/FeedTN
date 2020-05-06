@@ -7,6 +7,7 @@ using FeedTN.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FeedTN.Controllers
 {
@@ -48,9 +49,18 @@ namespace FeedTN.Controllers
             {
                 var user = await GetCurrentUserAsync();
 
+                var likedMenuItem = await _context.MenuItem
+                    .Where(mi => mi.MenuItemId == favorite.MenuItem.MenuItemId)
+                    .FirstOrDefaultAsync();
+
+                likedMenuItem.FavoriteCount++;
+
+                _context.MenuItem.Update(likedMenuItem);
+                await _context.SaveChangesAsync();
+
                 var favoriteInstance = new Favorite
                 {
-                    MenuItemId = favorite.MenuItemId
+                    MenuItemId = favorite.MenuItem.MenuItemId
                 };
 
                 favoriteInstance.UserId = user.Id;
@@ -58,7 +68,7 @@ namespace FeedTN.Controllers
                 _context.Favorite.Add(favoriteInstance);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Details", "MenuItems", new { id = favorite.MenuItemId });
+                return RedirectToAction("Details", "MenuItems", new { id = favorite.MenuItem.MenuItemId });
             }
             catch
             {

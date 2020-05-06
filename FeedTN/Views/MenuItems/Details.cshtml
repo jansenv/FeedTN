@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity 
-@model FeedTN.Models.MenuItem
+@model FeedTN.Models.MenuItemViewModels.MenuItemViewModel
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
@@ -9,51 +9,63 @@
 
 <h1>Details</h1>
 
-<div class="row float-right">
-    <form asp-controller="Favorites" asp-action="Create">
-        <input type="hidden" asp-for="MenuItemId" />
-        <input type="submit" value="Favorite" class="btn btn-success" />
-    </form>
-</div>
+@if (!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == true)
+{
+    <div class="row float-right">
+        @Model.MenuItem.FavoriteCount
+    </div>
+}
+else if (Model.UserHasFavorited == false)
+{
+    <div class="row float-right">
+        <form asp-controller="Favorites" asp-action="Create">
+            <input type="hidden" asp-for="@Model.MenuItem.MenuItemId" />
+            <input type="submit" value="Favorite" class="btn btn-success" />
+        </form>
+    </div>
+} else
+{
+    <div class="row float-right">You've already favorited this!</div>
+}
 
 <div>
     <h4>MenuItem</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.MenuItem.Title)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.MenuItem.Title)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.MenuItem.Description)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.MenuItem.Description)
         </dd>
         <dt class = "col-sm-2">
             Gluten Free
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GlutenFree)
+            @Html.DisplayFor(model => model.MenuItem.GlutenFree)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Vegetarian)
+            @Html.DisplayNameFor(model => model.MenuItem.Vegetarian)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Vegetarian)
+            @Html.DisplayFor(model => model.MenuItem.Vegetarian)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Vegan)
+            @Html.DisplayNameFor(model => model.MenuItem.Vegan)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Vegan)
+            @Html.DisplayFor(model => model.MenuItem.Vegan)
         </dd>
     </dl>
 </div>
 
-<form asp-controller="UserMenuItems" asp-action="Create" asp-route-id="@Model.MenuItemId">
+<form asp-controller="UserMenuItems" asp-action="Create" asp-route-id="@Model.MenuItem.MenuItemId">
     <input type="submit" class="btn btn-primary bg-primary border-primary" value="Add to order" />
 </form>
 

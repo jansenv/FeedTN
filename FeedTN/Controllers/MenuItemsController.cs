@@ -67,7 +67,42 @@ namespace FeedTN.Controllers
         {
             var menuItem = await _context.MenuItem
                 .FirstOrDefaultAsync(mi => mi.MenuItemId == id);
-            return View(menuItem);
+
+            var viewModel = new MenuItemViewModel()
+            {
+                MenuItem = new MenuItem()
+            };
+
+            viewModel.MenuItem.MenuItemId = menuItem.MenuItemId;
+            viewModel.MenuItem.Title = menuItem.Title;
+            viewModel.MenuItem.Description = menuItem.Description;
+            viewModel.MenuItem.ImagePath = menuItem.ImagePath;
+            viewModel.MenuItem.Active = menuItem.Active;
+            viewModel.MenuItem.GlutenFree = menuItem.GlutenFree;
+            viewModel.MenuItem.Vegetarian = menuItem.Vegetarian;
+            viewModel.MenuItem.Vegan = menuItem.Vegan;
+
+            if (_signInManager.IsSignedIn(User))
+            {
+                var user = await GetCurrentUserAsync();
+
+                var userPreference = await _context.Favorite
+                    .Where(p => p.MenuItemId == id)
+                    .Where(p => p.UserId == user.Id)
+                    .FirstOrDefaultAsync();
+
+                if (userPreference == null)
+                {
+                    viewModel.UserHasFavorited = false;
+                } else
+                {
+                    viewModel.UserHasFavorited = true;
+                }
+
+                return View(viewModel);
+            }
+
+            return View(viewModel);
         }
 
         // GET: MenuItems/Create
@@ -154,5 +189,7 @@ namespace FeedTN.Controllers
                 return View();
             }
         }
+
+        private async Task<ApplicationUser> GetCurrentUserAsync() => await _userManager.GetUserAsync(HttpContext.User);
     }
 }
