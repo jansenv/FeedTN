@@ -7,6 +7,11 @@
 {
     <div class="alert alert-success">@TempData["orderConfirmed"]</div>
 }
+@if (TempData.ContainsKey("reportConfirmation"))
+{
+    <div class="alert alert-success">@TempData["reportConfirmation"]</div>
+}
 
 <h1>Your cart is empty</h1>
 
+<a href=@Url.Action("Create", "Reports")>Report a problem</a>
