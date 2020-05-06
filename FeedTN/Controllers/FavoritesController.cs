@@ -105,16 +105,33 @@ namespace FeedTN.Controllers
             return View();
         }
 
-        // POST: Favorites/Delete/5
+        // POST: Favorites/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(Favorite unfavorite)
         {
             try
             {
-                // TODO: Add delete logic here
+                var user = await GetCurrentUserAsync();
 
-                return RedirectToAction(nameof(Index));
+                var UnlikedMenuItem = await _context.MenuItem
+                    .Where(mi => mi.MenuItemId == unfavorite.MenuItem.MenuItemId)
+                    .FirstOrDefaultAsync();
+
+                UnlikedMenuItem.FavoriteCount--;
+
+                _context.MenuItem.Update(UnlikedMenuItem);
+                await _context.SaveChangesAsync();
+
+                var FavoriteToDelete = await _context.Favorite
+                    .Where(f => f.MenuItemId == unfavorite.MenuItem.MenuItemId)
+                    .Where(f => f.UserId == user.Id)
+                    .FirstOrDefaultAsync();
+
+                _context.Favorite.Remove(FavoriteToDelete);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Details", "MenuItems", new { id = unfavorite.MenuItem.MenuItemId });
             }
             catch
             {

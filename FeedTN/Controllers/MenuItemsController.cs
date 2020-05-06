@@ -78,6 +78,7 @@ namespace FeedTN.Controllers
             viewModel.MenuItem.Description = menuItem.Description;
             viewModel.MenuItem.ImagePath = menuItem.ImagePath;
             viewModel.MenuItem.Active = menuItem.Active;
+            viewModel.MenuItem.FavoriteCount = menuItem.FavoriteCount;
             viewModel.MenuItem.GlutenFree = menuItem.GlutenFree;
             viewModel.MenuItem.Vegetarian = menuItem.Vegetarian;
             viewModel.MenuItem.Vegan = menuItem.Vegan;
