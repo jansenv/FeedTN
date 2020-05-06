@@ -9,6 +9,13 @@
 
 <h1>Details</h1>
 
+<div class="row float-right">
+    <form asp-controller="Favorites" asp-action="Create">
+        <input type="hidden" asp-for="MenuItemId" />
+        <input type="submit" value="Favorite" class="btn btn-success" />
+    </form>
+</div>
+
 <div>
     <h4>MenuItem</h4>
     <hr />

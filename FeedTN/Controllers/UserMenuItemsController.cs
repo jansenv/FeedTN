@@ -88,7 +88,7 @@ namespace FeedTN.Controllers
 
                     await _context.SaveChangesAsync();
 
-                    return RedirectToAction("Index", "Orders");
+                    return RedirectToAction("Index", "MenuItems");
                 }
             }
             catch (Exception ex)
