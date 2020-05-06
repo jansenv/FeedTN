@@ -24,6 +24,6 @@ namespace FeedTN.Models
         [Required]
         public ApplicationUser User { get; set; }
 
-        public virtual ICollection<UserMenuItem> UserMenuItems { get; set; }
+        public virtual List<UserMenuItem> UserMenuItems { get; set; }
     }
 }

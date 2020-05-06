@@ -104,7 +104,7 @@ namespace FeedTN.Migrations
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
                             Address = "123 Infinity Way",
-                            ConcurrencyStamp = "73c8ba35-942d-4206-b0d8-10fbccb93cfd",
+                            ConcurrencyStamp = "6f1b4e8f-6de6-4f8c-9b1f-fc2a7bddd900",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Admina",
@@ -113,7 +113,7 @@ namespace FeedTN.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKVZaGtxYmxKdbJ/92tExQtsevx/CSjMpguJYPMEtRvWCj6/37liI8l2b9TycbCuhw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECIpu1Uj9o6sz1sWVlD9WuqrOS9KUY82dw2yH19yMAiMIYCsqKbVGSt02Pw2AgSg9Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,
@@ -238,10 +238,7 @@ namespace FeedTN.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("MenuItemId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("MenuItemId1")
+                    b.Property<int>("MenuItemId")
                         .HasColumnType("int");
 
                     b.Property<int?>("OrderId")
@@ -252,7 +249,7 @@ namespace FeedTN.Migrations
 
                     b.HasKey("UserMenuItemId");
 
-                    b.HasIndex("MenuItemId1");
+                    b.HasIndex("MenuItemId");
 
                     b.HasIndex("OrderId");
 
@@ -429,7 +426,9 @@ namespace FeedTN.Migrations
                 {
                     b.HasOne("FeedTN.Models.MenuItem", "MenuItem")
                         .WithMany()
-                        .HasForeignKey("MenuItemId1");
+                        .HasForeignKey("MenuItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FeedTN.Models.Order", null)
                         .WithMany("UserMenuItems")

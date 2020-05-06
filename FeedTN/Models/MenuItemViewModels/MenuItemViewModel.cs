@@ -10,5 +10,6 @@ namespace FeedTN.Models.MenuItemViewModels
     {
         public MenuItem MenuItem { get; set; }
         public IFormFile ImageFile { get; set; }
+        public bool UserHasFavorited { get; set; }
     }
 }

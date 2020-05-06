@@ -1,6 +1,6 @@
-﻿@using Microsoft.AspNetCore.Identity 
+﻿@using Microsoft.AspNetCore.Identity
 @model IEnumerable<FeedTN.Models.MenuItem>
-@inject SignInManager<ApplicationUser> SignInManager 
+@inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
 @{
@@ -63,17 +63,17 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Vegan)
                     </td>
-                    @if(!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == false)
+                    @if (!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == false)
                     {
                         <td>
-
                         </td>
-                    } else if (UserManager.GetUserAsync(User).Result.IsAdmin == true)
+                    }
+                    else if (UserManager.GetUserAsync(User).Result.IsAdmin == true)
                     {
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.MenuItemId })
                             @*Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("SetInactive", "SetInactive", new { id = item.MenuItemId }) *@
+                                @Html.ActionLink("SetInactive", "SetInactive", new { id = item.MenuItemId }) *@
                         </td>
                     }
                 </tr>
@@ -82,65 +82,73 @@
     </tbody>
 </table>
 
-<h1>Inactive Items</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                Gluten Free
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vegetarian)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vegan)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            @if (item.Active == false)
+@if (!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == false)
+{
+    <table>
+    </table>
+}
+else if (UserManager.GetUserAsync(User).Result.IsAdmin == true)
+{
+    <h1>Inactive Items</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    Gluten Free
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vegetarian)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vegan)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        <a href=@Url.Action("Details", "MenuItems", new { id = item.MenuItemId }) title="Details" class="links">
-                            <img style="max-height: 250px; max-width: 250px" src="~/images/@item.ImagePath" alt="menu item image" />
-                        </a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.GlutenFree)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Vegetarian)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Vegan)
-                    </td>
-                    @if(!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == false)
-                    {
+                @if (item.Active == false)
+                {
+                    <tr>
                         <td>
-
+                            <a href=@Url.Action("Details", "MenuItems", new { id = item.MenuItemId }) title="Details" class="links">
+                                <img style="max-height: 250px; max-width: 250px" src="~/images/@item.ImagePath" alt="menu item image" />
+                            </a>
                         </td>
-                    } else if (UserManager.GetUserAsync(User).Result.IsAdmin == true)
-                    {
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.MenuItemId })
-                            @*Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("SetInactive", "SetInactive", new { id = item.MenuItemId }) *@
+                            @Html.DisplayFor(modelItem => item.Title)
                         </td>
-                    }
-                </tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GlutenFree)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Vegetarian)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Vegan)
+                        </td>
+                        @if (!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == false)
+                        {
+                            <td>
+                            </td>
+                        }
+                        else if (UserManager.GetUserAsync(User).Result.IsAdmin == true)
+                        {
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MenuItemId })
+                                @*Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("SetInactive", "SetInactive", new { id = item.MenuItemId }) *@
+                            </td>
+                        }
+                    </tr>
+                }
             }
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+}
