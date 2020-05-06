@@ -1,0 +1,36 @@
+﻿@model FeedTN.Models.OrderViewModels.OrderDetailViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>My Cart</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Item
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var lineItem in Model.LineItems) {
+        <tr>
+            <td>
+                @lineItem.MenuItem.Title           
+            </td>
+            <td>
+                <form asp-controller="UserMenuItems" asp-action="Delete" asp-route-Id="@lineItem.MenuItem.MenuItemId" method="post">
+                    <input type="submit" class="btn btn-danger bg-danger border-danger" value="DELETE" />
+                </form>     
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<button class="btn btn-outline-success badge-success border-success" >@Html.ActionLink("CHECKOUT", "Edit", new { id = Model.Order.OrderId }) </button>
+<form asp-controller="Orders" asp-action="Delete" method="post">
+    <input type="submit" class="btn-danger bg-danger border-danger" value="Cancel Order" />
+</form>

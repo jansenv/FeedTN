@@ -7,7 +7,7 @@ namespace FeedTN.Models
         [Key]
         public int UserMenuItemId { get; set; }
 
-        public string MenuItemId { get; set; }
+        public int MenuItemId { get; set; }
 
         public MenuItem MenuItem { get; set; }
 

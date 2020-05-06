@@ -251,8 +251,7 @@ namespace FeedTN.Migrations
                 {
                     UserMenuItemId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MenuItemId = table.Column<string>(nullable: true),
-                    MenuItemId1 = table.Column<int>(nullable: true),
+                    MenuItemId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
                     OrderId = table.Column<int>(nullable: true)
                 },
@@ -260,11 +259,11 @@ namespace FeedTN.Migrations
                 {
                     table.PrimaryKey("PK_UserMenuItem", x => x.UserMenuItemId);
                     table.ForeignKey(
-                        name: "FK_UserMenuItem_MenuItem_MenuItemId1",
-                        column: x => x.MenuItemId1,
+                        name: "FK_UserMenuItem_MenuItem_MenuItemId",
+                        column: x => x.MenuItemId,
                         principalTable: "MenuItem",
                         principalColumn: "MenuItemId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserMenuItem_Order_OrderId",
                         column: x => x.OrderId,
@@ -282,7 +281,7 @@ namespace FeedTN.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsAdmin", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "123 Infinity Way", "73c8ba35-942d-4206-b0d8-10fbccb93cfd", "admin@admin.com", true, "Admina", true, "Straytor", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEKVZaGtxYmxKdbJ/92tExQtsevx/CSjMpguJYPMEtRvWCj6/37liI8l2b9TycbCuhw==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com" });
+                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "123 Infinity Way", "6f1b4e8f-6de6-4f8c-9b1f-fc2a7bddd900", "admin@admin.com", true, "Admina", true, "Straytor", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAECIpu1Uj9o6sz1sWVlD9WuqrOS9KUY82dw2yH19yMAiMIYCsqKbVGSt02Pw2AgSg9Q==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -344,9 +343,9 @@ namespace FeedTN.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserMenuItem_MenuItemId1",
+                name: "IX_UserMenuItem_MenuItemId",
                 table: "UserMenuItem",
-                column: "MenuItemId1");
+                column: "MenuItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserMenuItem_OrderId",

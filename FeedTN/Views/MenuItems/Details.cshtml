@@ -45,6 +45,11 @@
         </dd>
     </dl>
 </div>
+
+<form asp-controller="UserMenuItems" asp-action="Create" asp-route-id="@Model.MenuItemId">
+    <input type="submit" class="btn btn-primary bg-primary border-primary" value="Add to order" />
+</form>
+
 <div>
     @if (!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == false)
     {
