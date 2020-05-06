@@ -1,4 +1,7 @@
-﻿@model IEnumerable<FeedTN.Models.MenuItem>
+﻿@using Microsoft.AspNetCore.Identity 
+@model IEnumerable<FeedTN.Models.MenuItem>
+@inject SignInManager<ApplicationUser> SignInManager 
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -13,7 +16,7 @@
 <a type="button" class="btn btn-primary mb-2" asp-action="Index" asp-route-filter="Gluten Free">Gluten Free</a>
 <a type="button" class="btn btn-success mb-2" asp-action="Index" asp-route-filter="Vegetarian">Vegetarian</a>
 <a type="button" class="btn btn-warning mb-2" asp-action="Index" asp-route-filter="Vegan">Vegan</a>
-<a type="button" class="btn btn-info mb-2" asp-action="Index" asp-route-filter="All">Show All</a>
+<a type="button" class="btn btn-info mb-2" asp-action="Index" asp-route-filter="All">Clear</a>
 
 <table class="table">
     <thead>
@@ -60,11 +63,19 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Vegan)
                     </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.MenuItemId })
-                        @*Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("SetInactive", "SetInactive", new { id = item.MenuItemId }) *@
-                    </td>
+                    @if(!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == false)
+                    {
+                        <td>
+
+                        </td>
+                    } else if (UserManager.GetUserAsync(User).Result.IsAdmin == true)
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MenuItemId })
+                            @*Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("SetInactive", "SetInactive", new { id = item.MenuItemId }) *@
+                        </td>
+                    }
                 </tr>
             }
         }
@@ -115,11 +126,19 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Vegan)
                     </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.MenuItemId })
-                        @*Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) *@
-                    </td>
+                    @if(!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == false)
+                    {
+                        <td>
+
+                        </td>
+                    } else if (UserManager.GetUserAsync(User).Result.IsAdmin == true)
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MenuItemId })
+                            @*Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("SetInactive", "SetInactive", new { id = item.MenuItemId }) *@
+                        </td>
+                    }
                 </tr>
             }
         }

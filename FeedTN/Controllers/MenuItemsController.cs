@@ -62,9 +62,11 @@ namespace FeedTN.Controllers
         }
 
         // GET: MenuItems/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var menuItem = await _context.MenuItem
+                .FirstOrDefaultAsync(mi => mi.MenuItemId == id);
+            return View(menuItem);
         }
 
         // GET: MenuItems/Create
