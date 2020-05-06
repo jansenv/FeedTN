@@ -116,7 +116,7 @@ namespace FeedTN.Controllers
 
                 TempData["orderConfirmed"] = "Your order has been processed.";
 
-                return RedirectToAction("Index", "MenuItems");
+                return RedirectToAction("Index", "Orders");
             }
             catch
             {

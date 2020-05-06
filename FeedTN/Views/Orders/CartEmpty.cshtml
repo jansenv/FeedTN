@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewData["Title"] = "CartEmpty";
+}
+
+@if (TempData.ContainsKey("orderConfirmed"))
+{
+    <div class="alert alert-success">@TempData["orderConfirmed"]</div>
+}
+
+<h1>Your cart is empty</h1>
+
