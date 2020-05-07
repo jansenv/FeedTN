@@ -204,6 +204,7 @@ namespace FeedTN.Migrations
                     ReportId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(nullable: true),
+                    Comments = table.Column<string>(nullable: true),
                     Active = table.Column<bool>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
                     ApplicationUserId = table.Column<string>(nullable: true)
@@ -281,7 +282,7 @@ namespace FeedTN.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsAdmin", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "123 Infinity Way", "6f1b4e8f-6de6-4f8c-9b1f-fc2a7bddd900", "admin@admin.com", true, "Admina", true, "Straytor", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAECIpu1Uj9o6sz1sWVlD9WuqrOS9KUY82dw2yH19yMAiMIYCsqKbVGSt02Pw2AgSg9Q==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com" });
+                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "123 Infinity Way", "0ef9903e-120e-483a-99fa-f2e425be501a", "admin@admin.com", true, "Admina", true, "Straytor", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEOs/LoUwDdxfy819GrwMbrXGK/t7p7GX77xLaNbpIR0irJnt4p4DS+HMcgs0ViKQNA==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -104,7 +104,7 @@ namespace FeedTN.Migrations
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
                             Address = "123 Infinity Way",
-                            ConcurrencyStamp = "6f1b4e8f-6de6-4f8c-9b1f-fc2a7bddd900",
+                            ConcurrencyStamp = "0ef9903e-120e-483a-99fa-f2e425be501a",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Admina",
@@ -113,7 +113,7 @@ namespace FeedTN.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECIpu1Uj9o6sz1sWVlD9WuqrOS9KUY82dw2yH19yMAiMIYCsqKbVGSt02Pw2AgSg9Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOs/LoUwDdxfy819GrwMbrXGK/t7p7GX77xLaNbpIR0irJnt4p4DS+HMcgs0ViKQNA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,
@@ -217,6 +217,9 @@ namespace FeedTN.Migrations
 
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
