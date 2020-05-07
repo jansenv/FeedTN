@@ -82,7 +82,7 @@ namespace FeedTN.Controllers
 
                 TempData["reportConfirmation"] = "Report sent";
 
-                return RedirectToAction("Index", "Orders");
+                return RedirectToAction("IndexOfCurrentUserIssues", "Reports");
             }
             catch
             {

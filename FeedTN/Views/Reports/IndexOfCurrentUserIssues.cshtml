@@ -4,6 +4,11 @@
     ViewData["Title"] = "IndexOfCurrentUserIssues";
 }
 
+@if (TempData.ContainsKey("reportConfirmation"))
+{
+    <div class="alert alert-success">@TempData["reportConfirmation"]</div>
+}
+
 <h1>Open Issues</h1>
 
 <table class="table">
@@ -38,8 +43,8 @@
                     </td>
                     <td>
                         @*Html.ActionLink("View", "Edit", new { id = item.ReportId }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ReportId }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                            @Html.ActionLink("Details", "Details", new { id = item.ReportId }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
                     </td>
                 </tr>
             }
@@ -65,26 +70,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-    @if (item.Active == false)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReportId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comments)
-            </td>
-            <td>
-                @*@Html.ActionLink("View", "Edit", new { id = item.ReportId }) |
-                @*Html.ActionLink("Details", "Details", new { id = item.ReportId }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-            </td>
-        </tr>
-    }
-}
+        @foreach (var item in Model)
+        {
+            @if (item.Active == false)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReportId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comments)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("View", "Edit", new { id = item.ReportId }) |
+                            @*Html.ActionLink("Details", "Details", new { id = item.ReportId }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>
