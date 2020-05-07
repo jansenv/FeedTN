@@ -47,10 +47,10 @@ namespace FeedTN.Controllers
         // GET: Reports/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            var menuItem = await _context.Report
+            var report = await _context.Report
                 .FirstOrDefaultAsync(r => r.ReportId == id);
 
-            return View(menuItem);
+            return View(report);
         }
 
         // GET: Reports/Create
