@@ -7,6 +7,7 @@ using FeedTN.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FeedTN.Controllers
 {
@@ -22,9 +23,12 @@ namespace FeedTN.Controllers
         }
 
         // GET: Reports
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var reports = await _context.Report
+                .ToListAsync();
+
+            return View(reports);
         }
 
         // GET: Reports/Details/5

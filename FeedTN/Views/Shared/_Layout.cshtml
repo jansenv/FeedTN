@@ -25,15 +25,20 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == true)
+                        @if (!SignInManager.IsSignedIn(User))
                         {
-                        <li></li>
+                            <li></li>
                         }
-                        else
+                        else if (SignInManager.IsSignedIn(User) && UserManager.GetUserAsync(User).Result.IsAdmin == true)
                         {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">My Cart</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Reports" asp-action="Index">Issues</a>
+                            </li>
+                        } else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">My Cart</a>
+                            </li>
                         }
                     </ul>
                 </div>
