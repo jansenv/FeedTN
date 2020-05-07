@@ -32,6 +32,18 @@ namespace FeedTN.Controllers
             return View(reports);
         }
 
+        public async Task<ActionResult> IndexOfCurrentUserIssues()
+        {
+            var user = await GetCurrentUserAsync();
+
+            var reports = await _context.Report
+                .Include(r => r.ApplicationUser)
+                .Where(r => r.UserId == user.Id)
+                .ToListAsync();
+
+            return View(reports);
+        }
+
         // GET: Reports/Details/5
         public async Task<ActionResult> Details(int id)
         {
