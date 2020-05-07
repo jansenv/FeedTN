@@ -55,10 +55,25 @@
             <input asp-for="Description" type="hidden" />
             <input asp-for="UserId" type="hidden" />
             <input asp-for="Comments" type="hidden" />
+            @if (Model.Active == true)
+            {
             <div class="form-group">
-                <input type="submit" value="Resolve" class="btn btn-primary" />
+                <input type="submit" value="Mark as Complete" class="btn btn-primary" />
             </div>
+            }
         </form>
+        @if (Model.Active == false)
+        {
+            <form asp-action="Reopen">
+                <input asp-for="ReportId" type="hidden" />
+                <input asp-for="Description" type="hidden" />
+                <input asp-for="UserId" type="hidden" />
+                <input asp-for="Comments" type="hidden" />
+                <div class="form-group">
+                    <input type="submit" value="Reopen Issue" class="btn btn-primary" />
+                </div>
+            </form>
+        }
     </div>
 </div>
 
