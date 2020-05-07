@@ -26,15 +26,19 @@ namespace FeedTN.Controllers
         public async Task<ActionResult> Index()
         {
             var reports = await _context.Report
+                .Include(r => r.ApplicationUser)
                 .ToListAsync();
 
             return View(reports);
         }
 
         // GET: Reports/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var menuItem = await _context.Report
+                .FirstOrDefaultAsync(r => r.ReportId == id);
+
+            return View(menuItem);
         }
 
         // GET: Reports/Create
@@ -56,7 +60,8 @@ namespace FeedTN.Controllers
                 {
                     Description = report.Description,
                     Active = true,
-                    UserId = user.Id
+                    UserId = user.Id,
+                    ApplicationUser = user
                 };
 
                 _context.Report.Add(reportItem);

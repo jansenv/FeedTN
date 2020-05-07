@@ -13,6 +13,8 @@ namespace FeedTN.Models
 
         public string Description { get; set; }
 
+        public string Comments { get; set; }
+
         public bool Active { get; set; }
 
         public string UserId { get; set; }
