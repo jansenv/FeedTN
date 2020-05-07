@@ -98,7 +98,6 @@ namespace FeedTN.Controllers
             return View(report);
         }
 
-        // POST: Reports/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Comment(int id, Report report)
@@ -127,7 +126,6 @@ namespace FeedTN.Controllers
             }
         }
 
-        // POST: Reports/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Resolve(int id, Report report)
@@ -139,6 +137,32 @@ namespace FeedTN.Controllers
                     ReportId = report.ReportId,
                     Description = report.Description,
                     Active = false,
+                    Comments = report.Comments,
+                    UserId = report.UserId,
+                };
+
+                _context.Report.Update(reportItem);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Reopen(int id, Report report)
+        {
+            try
+            {
+                var reportItem = new Report()
+                {
+                    ReportId = report.ReportId,
+                    Description = report.Description,
+                    Active = true,
                     Comments = report.Comments,
                     UserId = report.UserId,
                 };
