@@ -73,6 +73,7 @@ namespace FeedTN.Controllers
                     Description = report.Description,
                     Active = true,
                     UserId = user.Id,
+                    Comments = report.Comments,
                     ApplicationUser = user
                 };
 
@@ -90,19 +91,60 @@ namespace FeedTN.Controllers
         }
 
         // GET: Reports/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            var report = await _context.Report.FirstOrDefaultAsync(r => r.ReportId == id);
+
+            return View(report);
         }
 
         // POST: Reports/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Comment(int id, Report report)
         {
             try
             {
-                // TODO: Add update logic here
+                var reportItem = new Report()
+                {
+                    ReportId = report.ReportId,
+                    Description = report.Description,
+                    Active = report.Active,
+                    Comments = report.Comments,
+                    UserId = report.UserId,
+                };
+
+                _context.Report.Update(reportItem);
+                await _context.SaveChangesAsync();
+
+                TempData["commentConfirmed"] = "Updated";
+
+                return RedirectToAction("Edit", "Reports", new { id = report.ReportId });
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // POST: Reports/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Resolve(int id, Report report)
+        {
+            try
+            {
+                var reportItem = new Report()
+                {
+                    ReportId = report.ReportId,
+                    Description = report.Description,
+                    Active = false,
+                    Comments = report.Comments,
+                    UserId = report.UserId,
+                };
+
+                _context.Report.Update(reportItem);
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
