@@ -27,8 +27,6 @@ namespace FeedTN.Controllers
 
         public async Task<IActionResult> SendSms()
         {
-            // Find your Account Sid and Token at twilio.com/console
-            // DANGER! This is insecure. See http://twil.io/secure
             const string accountSid = "AC1c26a9a684895b4cf0a1104847f0b837";
             const string authToken = "b8733362f602a40fc5ba9c8a959fe184";
 
@@ -57,10 +55,15 @@ namespace FeedTN.Controllers
         [HttpPost]
         public TwiMLResult Index()
         {
-            var messagingResponse = new MessagingResponse();
-            messagingResponse.Message("The Robots are coming! Head for the hills!");
+            var requestBody = Request.Form["Body"];
+            var response = new MessagingResponse();
+            if (requestBody == "Order" || requestBody == "order")
+            {
+                response.Message("Welcome to Feed TN! Please log in with your user credentials to order:");
+            }
 
-            return TwiML(messagingResponse);
+
+            return TwiML(response);
         }
 
         private async Task<ApplicationUser> GetCurrentUserAsync() => await _userManager.GetUserAsync(HttpContext.User);

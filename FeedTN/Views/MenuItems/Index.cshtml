@@ -9,9 +9,18 @@
 
 <h1>Today's Menu</h1>
 
-<p>
-    <a asp-action="Create">Add New Menu Item</a>
-</p>
+@if (!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == false)
+{
+    <p>
+
+    </p>
+}
+else if (UserManager.GetUserAsync(User).Result.IsAdmin)
+{
+    <p>
+        <a asp-action="Create">Add New Menu Item</a>
+    </p>
+}
 
 <a type="button" class="btn btn-primary mb-2" asp-action="Index" asp-route-filter="Gluten Free">Gluten Free</a>
 <a type="button" class="btn btn-success mb-2" asp-action="Index" asp-route-filter="Vegetarian">Vegetarian</a>
