@@ -41,37 +41,46 @@ else
 <div>
     <h4>@Html.DisplayFor(model => model.MenuItem.Title)</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MenuItem.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MenuItem.Description)
-        </dd>
-        <dt class="col-sm-2">
-            Gluten Free
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MenuItem.GlutenFree)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MenuItem.Vegetarian)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MenuItem.Vegetarian)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MenuItem.Vegan)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MenuItem.Vegan)
-        </dd>
-    </dl>
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.MenuItem.Description)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.MenuItem.Description)
+                </dd>
+                <dt class="col-sm-3">
+                    Gluten Free
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.MenuItem.GlutenFree)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.MenuItem.Vegetarian)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.MenuItem.Vegetarian)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.MenuItem.Vegan)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.MenuItem.Vegan)
+                </dd>
+            </dl>
+        <form asp-controller="UserMenuItems" asp-action="Create" asp-route-id="@Model.MenuItem.MenuItemId">
+            <input type="submit" class="btn btn-primary bg-primary border-primary" value="Add to cart" />
+        </form>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-10">
+                <img style="max-height: 500px; max-width: 500px" src="~/images/@Model.MenuItem.ImagePath" alt="descriptive image" />
+            </div>
+        </div>
+    </div>
 </div>
 
-<form asp-controller="UserMenuItems" asp-action="Create" asp-route-id="@Model.MenuItem.MenuItemId">
-    <input type="submit" class="btn btn-primary bg-primary border-primary" value="Add to cart" />
-</form>
 
 <div>
     @if (!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == false)
