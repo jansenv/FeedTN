@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FeedTN.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200507160500_Initial")]
+    [Migration("20200511215555_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,7 +106,7 @@ namespace FeedTN.Migrations
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
                             Address = "123 Infinity Way",
-                            ConcurrencyStamp = "0ef9903e-120e-483a-99fa-f2e425be501a",
+                            ConcurrencyStamp = "1339092a-229d-4f52-839b-75cae895574b",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Admina",
@@ -115,7 +115,7 @@ namespace FeedTN.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOs/LoUwDdxfy819GrwMbrXGK/t7p7GX77xLaNbpIR0irJnt4p4DS+HMcgs0ViKQNA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDphTJj0TcV02CehI1hIKpgI9V6l+3jU5e2GdvyioDCEquxlnvXw19WzDSK853QiTA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,
@@ -246,7 +246,7 @@ namespace FeedTN.Migrations
                     b.Property<int>("MenuItemId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -437,7 +437,9 @@ namespace FeedTN.Migrations
 
                     b.HasOne("FeedTN.Models.Order", null)
                         .WithMany("UserMenuItems")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FeedTN.Models.ApplicationUser", "User")
                         .WithMany()

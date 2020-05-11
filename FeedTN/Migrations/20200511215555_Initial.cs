@@ -254,7 +254,7 @@ namespace FeedTN.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MenuItemId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
-                    OrderId = table.Column<int>(nullable: true)
+                    OrderId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -270,7 +270,7 @@ namespace FeedTN.Migrations
                         column: x => x.OrderId,
                         principalTable: "Order",
                         principalColumn: "OrderId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserMenuItem_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -282,7 +282,7 @@ namespace FeedTN.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsAdmin", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "123 Infinity Way", "0ef9903e-120e-483a-99fa-f2e425be501a", "admin@admin.com", true, "Admina", true, "Straytor", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEOs/LoUwDdxfy819GrwMbrXGK/t7p7GX77xLaNbpIR0irJnt4p4DS+HMcgs0ViKQNA==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com" });
+                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "123 Infinity Way", "1339092a-229d-4f52-839b-75cae895574b", "admin@admin.com", true, "Admina", true, "Straytor", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEDphTJj0TcV02CehI1hIKpgI9V6l+3jU5e2GdvyioDCEquxlnvXw19WzDSK853QiTA==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

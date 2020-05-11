@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Schema;
 
 namespace FeedTN.Controllers
 {
@@ -122,24 +124,29 @@ namespace FeedTN.Controllers
             }
         }
 
-        // GET: UserMenuItems/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         // POST: UserMenuItems/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                var user = await GetCurrentUserAsync();
 
-                return RedirectToAction(nameof(Index));
+                var userOrder = await _context.Order
+                    .Where(o => o.DateCompleted == null)
+                    .Where(o => o.UserId == user.Id)
+                    .FirstOrDefaultAsync();
+
+                var userMenuItem = await _context.UserMenuItem
+                    .Where(mi => mi.OrderId == userOrder.OrderId)
+                    .FirstOrDefaultAsync(mi => mi.MenuItemId == id);
+
+                _context.UserMenuItem.Remove(userMenuItem);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Orders");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }

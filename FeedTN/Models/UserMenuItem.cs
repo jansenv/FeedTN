@@ -14,5 +14,6 @@ namespace FeedTN.Models
         public string UserId { get; set; }
 
         public ApplicationUser User { get; set; }
+        public int OrderId { get; set; }
     }
 }

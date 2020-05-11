@@ -15,18 +15,28 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var lineItem in Model.LineItems) {
+        @foreach (var lineItem in Model.LineItems) 
+        {
+            <tr>
+                <td>
+                    @lineItem.MenuItem.Title
+                </td>
+                <td>
+                    1
+                </td>
+                <td>
+                    <form asp-controller="UserMenuItems" asp-action="Delete" asp-route-Id="@lineItem.MenuItem.MenuItemId">
+                        <input type="submit" value="DELETE" class="btn btn-danger bg-danger border-danger"/>
+                    </form>
+                </td>
+            </tr>
+        }
         <tr>
-            <td>
-                @lineItem.MenuItem.Title           
-            </td>
-            <td>
-                <form asp-controller="UserMenuItems" asp-action="Delete" asp-route-Id="@lineItem.MenuItem.MenuItemId" method="post">
-                    <input type="submit" class="btn btn-danger bg-danger border-danger" value="Remove from Cart" />
-                </form>     
-            </td>
+            <td></td>
+            <td></td>
+            <td>Total: @Model.Total</td>
+            <td></td>
         </tr>
-}
     </tbody>
 </table>
 
