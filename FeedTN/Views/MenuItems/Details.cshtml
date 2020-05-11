@@ -21,7 +21,7 @@ else if (Model.UserHasFavorited == false)
     <div class="float-right">
         <form asp-controller="Favorites" asp-action="Create">
             <input type="hidden" asp-for="@Model.MenuItem.MenuItemId" />
-            <input type="submit" value="Favorite" class="btn btn-success" />
+            <input type="submit" value="🤍 Favorite" class="btn" />
         </form>
     </div>
 }
@@ -33,7 +33,7 @@ else
     <div class="float-right">
         <form asp-controller="Favorites" asp-action="Delete">
             <input type="hidden" asp-for="@Model.MenuItem.MenuItemId" />
-            <input type="submit" value="Unfavorite" class="btn btn-success" />
+            <input type="submit" value="❤ Unfavorite" class="btn" />
         </form>
     </div>
 }
@@ -45,7 +45,7 @@ else
         <div class="col-md-6">
             <dl class="row">
                 <dt class="col-sm-3">
-                    @Html.DisplayNameFor(model => model.MenuItem.Description)
+                    Nutrition Facts
                 </dt>
                 <dd class="col-sm-7">
                     @Html.DisplayFor(model => model.MenuItem.Description)
@@ -53,28 +53,61 @@ else
                 <dt class="col-sm-3">
                     Gluten Free
                 </dt>
-                <dd class="col-sm-7">
-                    @Html.DisplayFor(model => model.MenuItem.GlutenFree)
-                </dd>
+                @if (Model.MenuItem.GlutenFree == true)
+                {
+                    <dd class="col-sm-7">
+                        ✔
+                    </dd>
+                }
+                else
+                {
+                    <dd class="col-sm-7">
+                        ❌
+                    </dd>
+                }
                 <dt class="col-sm-3">
                     @Html.DisplayNameFor(model => model.MenuItem.Vegetarian)
                 </dt>
-                <dd class="col-sm-7">
-                    @Html.DisplayFor(model => model.MenuItem.Vegetarian)
-                </dd>
+                @if (Model.MenuItem.Vegetarian == true)
+                {
+                    <dd class="col-sm-7">
+                        ✔
+                    </dd>
+                }
+                else
+                {
+                    <dd class="col-sm-7">
+                        ❌
+                    </dd>
+                }
                 <dt class="col-sm-3">
                     @Html.DisplayNameFor(model => model.MenuItem.Vegan)
                 </dt>
-                <dd class="col-sm-7">
-                    @Html.DisplayFor(model => model.MenuItem.Vegan)
-                </dd>
+                @if (Model.MenuItem.Vegan == true)
+                {
+                    <dd class="col-sm-7">
+                        ✔
+                    </dd>
+                }
+                else
+                {
+                    <dd class="col-sm-7">
+                        ❌
+                    </dd>
+                }
             </dl>
+        @if (!SignInManager.IsSignedIn(User))
+        {
+            <p>Please log in to order.</p>
+        } else
+        {
         <form asp-controller="UserMenuItems" asp-action="Create" asp-route-id="@Model.MenuItem.MenuItemId">
             <input type="submit" class="btn btn-primary bg-primary border-primary" value="Add to cart" />
         </form>
+        }
         </div>
         <div class="col-md-6">
-            <div class="col-md-10">
+            <div>
                 <img style="max-height: 500px; max-width: 500px" src="~/images/@Model.MenuItem.ImagePath" alt="descriptive image" />
             </div>
         </div>
@@ -88,6 +121,6 @@ else
     }
     else if (UserManager.GetUserAsync(User).Result.IsAdmin == true)
     {
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MenuItem.MenuItemId })
     }
 </div>

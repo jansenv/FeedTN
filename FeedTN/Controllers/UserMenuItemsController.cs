@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using FeedTN.Data;
 using FeedTN.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FeedTN.Controllers
 {
+    [Authorize]
     public class UserMenuItemsController : Controller
     {
         private readonly ApplicationDbContext _context;
