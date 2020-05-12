@@ -16,6 +16,7 @@ namespace FeedTN.Data
         public DbSet<MenuItem> MenuItem { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<Report> Report { get; set; }
+        public DbSet<School> School { get; set; }
         public DbSet<UserMenuItem> UserMenuItem { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,6 +32,10 @@ namespace FeedTN.Data
                 FirstName = "Admina",
                 LastName = "Straytor",
                 Address = "123 Infinity Way",
+                City = "Nashville",
+                State = "TN",
+                Zip = "37013",
+                SchoolId = 1,
                 IsAdmin = true,
                 UserName = "admin@admin.com",
                 NormalizedUserName = "ADMIN@ADMIN.COM",
@@ -44,6 +49,54 @@ namespace FeedTN.Data
             var passwordHash = new PasswordHasher<ApplicationUser>();
             user.PasswordHash = passwordHash.HashPassword(user, "Admin8*");
             modelBuilder.Entity<ApplicationUser>().HasData(user);
+
+            modelBuilder.Entity<School>().HasData(
+                new School()
+                {
+                    SchoolId = 1,
+                    Name = "Cane Ridge Elementary",
+                    Address = "3884 Asheford Trace",
+                    City = "Antioch",
+                    State = "TN",
+                    Zip = "37013"
+                },
+                new School()
+                {
+                    SchoolId = 2,
+                    Name = "Eagle View Elementary",
+                    Address = "1470 Eagle View Blvd",
+                    City = "Antioch",
+                    State = "TN",
+                    Zip = "37013"
+                },
+                new School()
+                {
+                    SchoolId = 3,
+                    Name = "Haywood Elementary",
+                    Address = "3790 Turley Dr",
+                    City = "Nashville",
+                    State = "TN",
+                    Zip = "37211"
+                },
+                new School()
+                {
+                    SchoolId = 4,
+                    Name = "McGavock Elementary",
+                    Address = "275 McGavock Pk",
+                    City = "Nashville",
+                    State = "TN",
+                    Zip = "37211"
+                },
+                new School()
+                {
+                    SchoolId = 5,
+                    Name = "Smith Springs Elementary",
+                    Address = "3132 Smith Springs Rd",
+                    City = "Antioch",
+                    State = "TN",
+                    Zip = "37013"
+                }
+                );
         }
     }
 }

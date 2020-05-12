@@ -55,13 +55,21 @@ namespace FeedTN.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Required]
-            [Display(Name = "Street Address")]
-            public string Address { get; set; }
-
-            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
+
+            [Required]
+            [Display(Name = "Street Address")]
+            public string Address { get; set; }
+
+            public string City { get; set; }
+        
+            public string State { get; set; }
+
+            public string Zip { get; set; }
+
+            public int SchoolId { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -91,8 +99,12 @@ namespace FeedTN.Areas.Identity.Pages.Account
                     UserName = Input.Email, 
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
+                    Email = Input.Email,
                     Address = Input.Address,
-                    Email = Input.Email
+                    City = Input.City,
+                    State = Input.State,
+                    Zip = Input.Zip,
+                    SchoolId = Input.SchoolId
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

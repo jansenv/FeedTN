@@ -135,15 +135,28 @@ namespace FeedTN.Controllers
         // POST: Orders/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete()
         {
             try
             {
-                // TODO: Add delete logic here
+                var user = await GetCurrentUserAsync();
+                var order = await _context.Order
+                    .Where(o => o.UserId == user.Id).FirstOrDefaultAsync(o => o.DateCompleted == null);
 
-                return RedirectToAction(nameof(Index));
+                var userMenuItems = await _context.UserMenuItem.Where(mi => mi.OrderId == order.OrderId).ToListAsync();
+                foreach (var mi in userMenuItems)
+                {
+                    _context.UserMenuItem.Remove(mi);
+                }
+
+                _context.Order.Remove(order);
+                await _context.SaveChangesAsync();
+
+                TempData["cancelledOrder"] = "Order cancelled";
+
+                return RedirectToAction("Index", "Orders");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }

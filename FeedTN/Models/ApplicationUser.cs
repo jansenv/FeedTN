@@ -25,6 +25,19 @@ namespace FeedTN.Models
         [Required]
         public string Address { get; set; }
 
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        public string State { get; set; }
+
+        [Required]
+        public string Zip { get; set; }
+
+        public int SchoolId { get; set; }
+
+        public School School { get; set; }
+
         public bool IsAdmin { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }

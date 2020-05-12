@@ -19,14 +19,9 @@
         {
             <tr>
                 <td>
-                    @lineItem.MenuItem.Title
-                </td>
-                <td>
-                    1
-                </td>
-                <td>
                     <form asp-controller="UserMenuItems" asp-action="Delete" asp-route-Id="@lineItem.MenuItem.MenuItemId">
-                        <input type="submit" value="DELETE" class="btn btn-danger bg-danger border-danger"/>
+                        <input type="image" src="~/staticImages/trash-can.svg" class="btn"/>
+                    @lineItem.MenuItem.Title
                     </form>
                 </td>
             </tr>
@@ -34,7 +29,7 @@
         <tr>
             <td></td>
             <td></td>
-            <td>Total: @Model.Total</td>
+            <td></td>
             <td></td>
         </tr>
     </tbody>
@@ -43,10 +38,10 @@
 <form asp-Controller="Orders" asp-action="Edit" method="post">
     <input type="hidden" asp-for="Order.OrderId" />
     <div class="form-group">
-        <input type="submit" class="btn-success bg-success border-success" value="Place Your Order" />
+        <input type="submit" class="btn btn-success bg-success border-success" value="Place Your Order" />
     </div>
 </form>
 
 <form asp-controller="Orders" asp-action="Delete" method="post">
-    <input type="submit" class="btn-danger bg-danger border-danger" value="Cancel" />
+    <input type="submit" class="btn btn-danger bg-danger border-danger" value="Cancel" />
 </form>
