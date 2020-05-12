@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using FeedTN.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace FeedTN.Areas.Identity.Pages.Account
 {
@@ -24,17 +27,20 @@ namespace FeedTN.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _context;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         [BindProperty]
@@ -43,6 +49,8 @@ namespace FeedTN.Areas.Identity.Pages.Account
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
+
+        public List<SelectListItem> SchoolOptions { get; set; }
 
         public class InputModel
         {
@@ -87,6 +95,12 @@ namespace FeedTN.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            var schoolOptions = await _context.School
+                .Select(s => new SelectListItem() { Text = s.Name, Value = s.SchoolId.ToString() })
+                .ToListAsync();
+
+            SchoolOptions = schoolOptions;
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)

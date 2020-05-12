@@ -89,6 +89,15 @@ namespace FeedTN.Data
                 },
                 new School()
                 {
+                    SchoolId = 6,
+                    Name = "RePublic High",
+                    Address = "3307 Brick Church Pike",
+                    City = "Nashville",
+                    State = "TN",
+                    Zip = "37207"
+                },
+                new School()
+                {
                     SchoolId = 5,
                     Name = "Smith Springs Elementary",
                     Address = "3132 Smith Springs Rd",
@@ -96,7 +105,7 @@ namespace FeedTN.Data
                     State = "TN",
                     Zip = "37013"
                 }
-                );
+            );
         }
     }
 }
