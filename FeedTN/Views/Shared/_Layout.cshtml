@@ -23,7 +23,7 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light h4" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         @if (!SignInManager.IsSignedIn(User))
                         {
@@ -32,16 +32,16 @@
                         else if (SignInManager.IsSignedIn(User) && UserManager.GetUserAsync(User).Result.IsAdmin == true)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Reports" asp-action="Index">Issues</a>
+                                <a class="nav-link text-light h4" asp-area="" asp-controller="Reports" asp-action="Index">Issues</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Orders" asp-action="Index">My Cart</a>
+                                <a class="nav-link text-light h4" asp-area="" asp-controller="Orders" asp-action="Index">My Cart</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Reports" asp-action="IndexOfCurrentUserIssues">Issues</a>
+                                <a class="nav-link text-light h4" asp-area="" asp-controller="Reports" asp-action="IndexOfCurrentUserIssues">Issues</a>
                             </li>
                         }
                     </ul>
@@ -57,7 +57,7 @@
 
     <footer class="navbar bg-dark border-top fixed-bottom text-muted">
         <div class="container">
-            <strong>⚠<a asp-area="" asp-controller="Reports" asp-action="Create">Report a Problem</a></strong>
+            <h5>⚠<a asp-area="" asp-controller="Reports" asp-action="Create">Report a Problem</a></h5>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
