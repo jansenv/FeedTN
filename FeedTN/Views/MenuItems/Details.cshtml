@@ -96,7 +96,7 @@ else
                     </dd>
                 }
             </dl>
-        @if (!SignInManager.IsSignedIn(User))
+        @if (!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == true)
         {
 
         } else

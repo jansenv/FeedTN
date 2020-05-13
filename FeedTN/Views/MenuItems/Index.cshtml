@@ -160,15 +160,42 @@ else if (UserManager.GetUserAsync(User).Result.IsAdmin == true)
                         <td>
                             @Html.DisplayFor(modelItem => item.Title)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.GlutenFree)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Vegetarian)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Vegan)
-                        </td>
+                        @if (item.GlutenFree == true)
+                        {
+                            <td>
+                                ✔
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                ❌
+                            </td>
+                        }
+                        @if (item.Vegetarian == true)
+                        {
+                            <td>
+                                ✔
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                ❌
+                            </td>
+                        }
+                        @if (item.Vegan == true)
+                        {
+                            <td>
+                                ✔
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                ❌
+                            </td>
+                        }
                         @if (!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == false)
                         {
                             <td>
@@ -179,11 +206,11 @@ else if (UserManager.GetUserAsync(User).Result.IsAdmin == true)
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.MenuItemId })
                                 @*Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("SetInactive", "SetInactive", new { id = item.MenuItemId }) *@
+                            @Html.ActionLink("SetInactive", "SetInactive", new { id = item.MenuItemId }) *@
                             </td>
                         }
                     </tr>
-                }
+       }
             }
         </tbody>
     </table>
