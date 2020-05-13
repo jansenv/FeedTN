@@ -63,6 +63,15 @@ namespace FeedTN.Data
                 new School()
                 {
                     SchoolId = 2,
+                    Name = "Dupont Elementary",
+                    Address = "1311 9th St",
+                    City = "Old Hickory",
+                    State = "TN",
+                    Zip = "37138"
+                },
+                new School()
+                {
+                    SchoolId = 3,
                     Name = "Eagle View Elementary",
                     Address = "1470 Eagle View Blvd",
                     City = "Antioch",
@@ -71,7 +80,25 @@ namespace FeedTN.Data
                 },
                 new School()
                 {
-                    SchoolId = 3,
+                    SchoolId = 4,
+                    Name = "Glendale Elementary",
+                    Address = "800 Thompson Ave",
+                    City = "Nashville",
+                    State = "TN",
+                    Zip = "37204"
+                },
+                new School()
+                {
+                    SchoolId = 5,
+                    Name = "Goodlettsville Elementary",
+                    Address = "514 Donald Ave",
+                    City = "Goodlettsville",
+                    State = "TN",
+                    Zip = "37072"
+                },
+                new School()
+                {
+                    SchoolId = 6,
                     Name = "Haywood Elementary",
                     Address = "3790 Turley Dr",
                     City = "Nashville",
@@ -80,7 +107,7 @@ namespace FeedTN.Data
                 },
                 new School()
                 {
-                    SchoolId = 4,
+                    SchoolId = 7,
                     Name = "McGavock Elementary",
                     Address = "275 McGavock Pk",
                     City = "Nashville",
@@ -89,7 +116,7 @@ namespace FeedTN.Data
                 },
                 new School()
                 {
-                    SchoolId = 6,
+                    SchoolId = 8,
                     Name = "RePublic High",
                     Address = "3307 Brick Church Pike",
                     City = "Nashville",
@@ -98,12 +125,21 @@ namespace FeedTN.Data
                 },
                 new School()
                 {
-                    SchoolId = 5,
+                    SchoolId = 9,
                     Name = "Smith Springs Elementary",
                     Address = "3132 Smith Springs Rd",
                     City = "Antioch",
                     State = "TN",
                     Zip = "37013"
+                },
+                new School()
+                {
+                    SchoolId = 10,
+                    Name = "Westmeade Elementary",
+                    Address = "6641 Clearbrook Dr",
+                    City = "Nashville",
+                    State = "TN",
+                    Zip = "37205"
                 }
             );
         }

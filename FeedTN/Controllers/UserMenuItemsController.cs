@@ -13,7 +13,6 @@ using Newtonsoft.Json.Schema;
 
 namespace FeedTN.Controllers
 {
-    [Authorize]
     public class UserMenuItemsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -31,18 +30,7 @@ namespace FeedTN.Controllers
             return View();
         }
 
-        // GET: UserMenuItems/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: UserMenuItems/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
+        [Authorize]
         // POST: UserMenuItems/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

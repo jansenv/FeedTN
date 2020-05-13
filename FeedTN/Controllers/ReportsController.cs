@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FeedTN.Data;
 using FeedTN.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +33,7 @@ namespace FeedTN.Controllers
             return View(reports);
         }
 
+        [Authorize]
         public async Task<ActionResult> IndexOfCurrentUserIssues()
         {
             var user = await GetCurrentUserAsync();
@@ -54,6 +56,7 @@ namespace FeedTN.Controllers
         }
 
         // GET: Reports/Create
+        [Authorize]
         public async Task<ActionResult> Create()
         {
             return View();

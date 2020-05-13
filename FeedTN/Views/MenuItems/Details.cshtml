@@ -98,7 +98,7 @@ else
             </dl>
         @if (!SignInManager.IsSignedIn(User))
         {
-            <p>Please log in to order.</p>
+
         } else
         {
         <form asp-controller="UserMenuItems" asp-action="Create" asp-route-id="@Model.MenuItem.MenuItemId">
