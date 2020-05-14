@@ -6,6 +6,7 @@ using FeedTN.Data;
 using FeedTN.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Twilio;
 using Twilio.AspNet.Core;
 using Twilio.Rest.Api.V2010.Account;
@@ -18,17 +19,20 @@ namespace FeedTN.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IConfiguration Configuration;
 
-        public SmsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public SmsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _context = context;
+            Configuration = configuration;
         }
 
         public async Task<IActionResult> SendSms()
         {
-            const string accountSid = "AC1c26a9a684895b4cf0a1104847f0b837";
-            const string authToken = "b8733362f602a40fc5ba9c8a959fe184";
+            var twilioSecrets = new TwilioSecrets();
+
+            Configuration.GetSection("Twilio").Bind(twilioSecrets);
 
             var loggedInUser = await GetCurrentUserAsync();
 
@@ -36,10 +40,10 @@ namespace FeedTN.Controllers
             {
             var phone = loggedInUser.PhoneNumber.ToString();
 
-            TwilioClient.Init(accountSid, authToken);
+            TwilioClient.Init(twilioSecrets.accountSid, twilioSecrets.authToken);
 
                 var message = MessageResource.Create(
-                   body: "Your order is confirmed! Be on the lookout for your driver.",
+                   body: "Your order with Feed TN is confirmed! Be on the lookout for your driver.",
                    from: new PhoneNumber("+12055396681"),
                    to: new PhoneNumber($"+1{phone}"));
 
