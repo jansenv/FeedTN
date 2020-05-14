@@ -142,6 +142,81 @@ namespace FeedTN.Data
                     Zip = "37205"
                 }
             );
+
+            modelBuilder.Entity<MenuItem>().HasData(
+                new MenuItem
+                {
+                    MenuItemId = 1,
+                    Title = "Kale Salad",
+                    Description = "400 calories",
+                    ImagePath = "kale.jpg",
+                    FavoriteCount = 32,
+                    Active = true,
+                    GlutenFree = true,
+                    Vegetarian = true,
+                    Vegan = true
+                },
+                new MenuItem
+                {
+                    MenuItemId = 2,
+                    Title = "Vegan Burrito Bowl",
+                    Description = "800 calories",
+                    ImagePath = "burritoBowl.jpg",
+                    FavoriteCount = 55,
+                    Active = true,
+                    GlutenFree = false,
+                    Vegetarian = true,
+                    Vegan = true
+                },
+                new MenuItem
+                {
+                    MenuItemId = 3,
+                    Title = "5 Nuggets",
+                    Description = "80 calories per nugget",
+                    ImagePath = "nuggets.jpg",
+                    FavoriteCount = 45,
+                    Active = true,
+                    GlutenFree = false,
+                    Vegetarian = false,
+                    Vegan = false
+                },
+                new MenuItem
+                {
+                    MenuItemId = 4,
+                    Title = "Square Pizza",
+                    Description = "200 calories per slice",
+                    ImagePath = "pizza.jpg",
+                    FavoriteCount = 124,
+                    Active = true,
+                    GlutenFree = true,
+                    Vegetarian = true,
+                    Vegan = false
+                },
+                new MenuItem
+                {
+                    MenuItemId = 5,
+                    Title = "Chocolate Milk",
+                    Description = "90 calories",
+                    ImagePath = "chocMilk.jpg",
+                    FavoriteCount = 44,
+                    Active = true,
+                    GlutenFree = true,
+                    Vegetarian = true,
+                    Vegan = false
+                },
+                new MenuItem
+                {
+                    MenuItemId = 6,
+                    Title = "Orange Juice",
+                    Description = "60 calories",
+                    ImagePath = "oj.jpg",
+                    FavoriteCount = 23,
+                    Active = true,
+                    GlutenFree = true,
+                    Vegetarian = true,
+                    Vegan = true
+                }
+            );
         }
     }
 }
