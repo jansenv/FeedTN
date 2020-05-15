@@ -113,14 +113,3 @@ else
         </div>
     </div>
 </div>
-
-
-<div>
-    @if (!SignInManager.IsSignedIn(User) || UserManager.GetUserAsync(User).Result.IsAdmin == false)
-    {
-    }
-    else if (UserManager.GetUserAsync(User).Result.IsAdmin == true)
-    {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.MenuItem.MenuItemId })
-    }
-</div>

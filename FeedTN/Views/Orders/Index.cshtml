@@ -1,4 +1,7 @@
-﻿@model FeedTN.Models.OrderViewModels.OrderDetailViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@model FeedTN.Models.OrderViewModels.OrderDetailViewModel
+@inject UserManager<ApplicationUser> UserManager
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -27,7 +30,7 @@
             </tr>
         }
         <tr>
-            <td></td>
+            <td>Your address on file is <strong>@UserManager.GetUserAsync(User).Result.Address</strong></td>
             <td></td>
             <td></td>
             <td></td>

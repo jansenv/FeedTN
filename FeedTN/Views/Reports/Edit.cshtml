@@ -4,8 +4,6 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
 @if (TempData.ContainsKey("commentConfirmed"))
 {
     <div class="alert alert-success">@TempData["commentConfirmed"]</div>
@@ -18,7 +16,7 @@
         <form asp-action="Comment">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ReportId" class="control-label"></label>
+                <label asp-for="ReportId" class="control-label">Ticket #</label>
                 <input asp-for="ReportId" disabled="disabled" class="form-control" />
                 <input asp-for="ReportId" type="hidden" />
                 <span asp-validation-for="ReportId" class="text-danger"></span>
@@ -29,18 +27,8 @@
                 <input asp-for="Description" type="hidden" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" disabled="disabled" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-                    <input asp-for="Active" type="hidden" />
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" disabled="disabled" class="form-control" />
+                <input asp-for="Active" type="hidden" />
                 <input asp-for="UserId" type="hidden" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="Comments" class="control-label"></label>
                 <textarea asp-for="Comments" class="form-control"></textarea>
