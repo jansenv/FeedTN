@@ -339,7 +339,7 @@ namespace FeedTN.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsAdmin", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SchoolId", "SecurityStamp", "State", "TwoFactorEnabled", "UserName", "Zip" },
-                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "123 Infinity Way", "Nashville", "21ea67cf-aba1-4d48-8a6c-a2544bfa5793", "admin@admin.com", true, "Admina", true, "Straytor", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEP9LdPcB5WbBqNU8q36w6gamOEI3QvF8y2hMwwfrP/5eqnIUNFNAlp/N7NkYGyyL2w==", null, false, 1, "7f434309-a4d9-48e9-9ebb-8803db794577", "TN", false, "admin@admin.com", "37013" });
+                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "123 Infinity Way", "Nashville", "f4806156-ee63-48c8-bf23-f65708262027", "admin@admin.com", true, "Admina", true, "Straytor", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEHwyAl0NZ9nTgcVMOS5pmszbM+glyAZ/tm19MPqO86YnSwfJRVYyT8brwt8lQa+3eA==", null, false, 1, "7f434309-a4d9-48e9-9ebb-8803db794577", "TN", false, "admin@admin.com", "37013" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

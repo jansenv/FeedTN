@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FeedTN.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200514163741_Initial")]
+    [Migration("20200516150151_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,7 +124,7 @@ namespace FeedTN.Migrations
                             AccessFailedCount = 0,
                             Address = "123 Infinity Way",
                             City = "Nashville",
-                            ConcurrencyStamp = "21ea67cf-aba1-4d48-8a6c-a2544bfa5793",
+                            ConcurrencyStamp = "f4806156-ee63-48c8-bf23-f65708262027",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Admina",
@@ -133,7 +133,7 @@ namespace FeedTN.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP9LdPcB5WbBqNU8q36w6gamOEI3QvF8y2hMwwfrP/5eqnIUNFNAlp/N7NkYGyyL2w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHwyAl0NZ9nTgcVMOS5pmszbM+glyAZ/tm19MPqO86YnSwfJRVYyT8brwt8lQa+3eA==",
                             PhoneNumberConfirmed = false,
                             SchoolId = 1,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
