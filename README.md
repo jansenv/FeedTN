@@ -1,1 +1,1 @@
-https://feedtn.azurewebsites.net/MenuItems
+Deployed at https://feedtn.azurewebsites.net
