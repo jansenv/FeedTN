@@ -1,4 +1,1 @@
-# FeedTN
-Back-end capstone .NET MVC
-
-Deployed at feedtn.azurewebsites.com
+# deployed at https://feedtn.azurewebsites.com
